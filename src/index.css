@@ -2,7 +2,7 @@
   --kuromi-purple: #d2b4f2;
   --kuromi-dark-purple: #2c1c41;
   --kuromi-pink: #f7a8c7;
-  --text-black: #1a1a1a;
+  --text-black: #333;
   --bg-image: url('./assets/alt-bg.png');
 
   font-family: 'Comic Sans MS', system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -56,6 +56,14 @@ p {
   justify-content: center;
   position: relative;
   padding: 2rem;
+  gap: 8px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
 .top-instagram-link {
@@ -74,12 +82,13 @@ p {
   z-index: 10;
   line-height: 0;
   text-decoration: none;
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2);
 }
 
 .top-instagram-link:hover {
   transform: scale(1.1);
-  color: #755ea2;
-  border-color: #755ea2;
+  color: #f7a8c7;
+  border-color: #f7a8c7;
 }
 
 .event-list {
@@ -104,6 +113,11 @@ p {
   width: 100%;
 }
 
+@media (min-width: 768px) {
+  .logo {
+    width: 50%;
+  }
+}
 .event-box {
   display: flex;
   align-items: center;
@@ -116,7 +130,7 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('./assets/purple-blob.png');
+  background-image: url('./assets/date-blob-2.png');
   background-size: contain;
   background-repeat: no-repeat;
   width: 150px;
@@ -158,17 +172,21 @@ p {
   font-weight: 500;
 }
 
+.event-desc {
+  font-size: 12px;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
 .location-button,
 .calendar-button {
   display: block;
-  width: 100%;
   background-color: #fff;
   color: #000;
   font-weight: bold;
   border-radius: 32px;
   border: 2px solid #000;
   padding: 4px 0;
-  display: inline-block;
   text-align: center;
   text-decoration: none;
   font-size: 12px;

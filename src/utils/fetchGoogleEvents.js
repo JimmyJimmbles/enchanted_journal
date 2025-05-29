@@ -1,8 +1,7 @@
-// src/utils/fetchGoogleEvents.js
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-export async function fetchGoogleCalendarEvents(calendarId, apiKey) {
+export const fetchGoogleCalendarEvents = async (calendarId, apiKey) => {
   const timeMin = new Date().toISOString(); // Only future events
 
   const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`;
