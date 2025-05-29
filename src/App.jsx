@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchGoogleCalendarEvents } from './utils/fetchGoogleEvents';
 import './App.css';
 import bowImage from './assets/bow.png';
-import mainLogo from './assets/enchanted-logo.png';
+import mainLogo from './assets/enchanted-journal-club-logo.png';
 // import kuromiImage from './assets/kuromi.png';
 import bgImage from './assets/bg-image.png';
 
@@ -21,14 +21,18 @@ function App() {
   return (
     <div className="app">
       <div className="header">
-        {/* <img src={kuromiImage} alt="Kuromi" className="kuromi" /> */}
         <div className="title-group">
-          {/* <h1 className="title">JOURNALING CLUB</h1> */}
-
-          {/* <img src={bowImage} alt="Bow" className="bow" /> */}
-          {/* <img src={mainLogo} alt="Enchanted Journal Club" className="logo" /> */}
-          <img src={bowImage} alt="Bow" className="footer-bow bow"  />
+          {/* <img src={bowImage} alt="Bow" className="footer-bow bow" /> */}
+          <img src={mainLogo} alt="Bow" className="footer-bow logo" style={{ marginBlock: "-78px" }}/>
         </div>
+        <a
+          href="https://www.instagram.com/enchanted.journal.club"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="top-instagram-link"
+        >
+          <i className="fa-brands fa-instagram instagram-icon"></i>
+        </a>
       </div>
 
       <div className="event-list">
@@ -71,13 +75,6 @@ function App() {
 
       <footer className="footer">
         <img src={bowImage} alt="Bow" className="footer-bow bow"  />
-        <a
-          href="https://www.instagram.com/yourprofile"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="fa-brands fa-instagram instagram-icon"></i>
-        </a>
       </footer>
     </div>
   );
