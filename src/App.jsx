@@ -1,94 +1,105 @@
+/**
+ * APP COMPONENT
+ * 
+ * This is the MAIN component of our application.
+ * It's like the "brain" that coordinates everything.
+ * 
+ * This component:
+ * 1. Fetches events from Google Calendar when the page loads
+ * 2. Stores the events in "state" (React's way of remembering data)
+ * 3. Displays the Header, EventList, and Footer components
+ */
+
+// Import React hooks - these are special functions React gives us
+// useState: Lets us store data that can change (like our events list)
+// useEffect: Lets us do things when the component first loads (like fetching data)
 import { useEffect, useState } from 'react';
+
+// Import our utility function to fetch events from Google Calendar
 import { fetchGoogleCalendarEvents } from './utils/fetchGoogleEvents';
+
+// Import our constants (API keys, calendar ID, etc.)
+import { CALENDAR_ID, API_KEY } from './constants';
+
+// Import CSS for styling
 import './App.css';
-import bowImage from './assets/bow.png';
-import mainLogo from './assets/enchanted-journal-club-logo.png';
 
-const CALENDAR_ID = 'e504dc37effc8752a1f31f55e9fdffe95862402c3d63574b689860603f068c6e@group.calendar.google.com';
-const API_KEY = 'AIzaSyAU2gf_PZw2nyE1-uy2nUxNCzIdckZ68YU';
+// Import our custom components
+import Header from './components/Header';
+import EventList from './components/EventList';
+import Footer from './components/Footer';
 
-function App() {
+/**
+ * THE APP FUNCTION
+ * 
+ * This is a React component. Think of it like a function that returns HTML.
+ * When React sees this component, it will render (display) whatever we return.
+ */
+const App = () => {
+  /**
+   * STATE - React's way of storing data that can change
+   * 
+   * useState is a "hook" (a special React function).
+   * It returns two things:
+   * 1. events - the current value of our events (starts as an empty array [])
+   * 2. setEvents - a function to update the events
+   * 
+   * When we call setEvents(newEvents), React will automatically re-render
+   * the component with the new data. This is React's "magic"!
+   */
   const [events, setEvents] = useState([]);
 
+  /**
+   * useEffect - React's way of doing things when the component loads
+   * 
+   * The empty array [] at the end means "only run this once when the component first loads"
+   * (not every time the component re-renders)
+   * 
+   * This is where we fetch the events from Google Calendar.
+   */
   useEffect(() => {
+    /**
+     * Fetch events from Google Calendar
+     * 
+     * fetchGoogleCalendarEvents is an "async" function, which means it takes time to complete.
+     * We use .then() to wait for it to finish, then update our events state.
+     * 
+     * If something goes wrong, .catch() will handle the error.
+     */
     fetchGoogleCalendarEvents(CALENDAR_ID, API_KEY)
-      .then(setEvents)
-      .catch(err => console.error('Error fetching events:', err));
-  }, []);
+      .then(setEvents) // When events are fetched, update the state
+      .catch(err => {
+        // If there's an error, log it to the console so we can see what went wrong
+        console.error('Error fetching events:', err);
+      });
+  }, []); // Empty array = only run once when component first loads
 
+  /**
+   * RETURN - What the component displays
+   * 
+   * This is JSX (JavaScript XML) - it looks like HTML but it's actually JavaScript.
+   * React converts this into real HTML that the browser can display.
+   * 
+   * We're using our custom components:
+   * - <Header /> - Shows the logo and social links
+   * - <EventList events={events} /> - Shows all the events (we pass the events as a "prop")
+   * - <Footer /> - Shows the decorative bow
+   */
   return (
     <div className="app">
-      <div className="header">
-        <div className="title-group">
-          <img src={mainLogo} alt="Bow" className="footer-bow logo" />
-        </div>
-        <div className="flex">
-        <a
-          href="https://www.instagram.com/enchanted.journal.club"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="top-instagram-link"
-        >
-          <i className="fa-brands fa-instagram instagram-icon"></i>
-        </a>
+      {/* Header component - displays logo and social media links */}
+      <Header />
 
-        <a
-          href="https://www.meetup.com/austin-enchanted-journal-club-meetup/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="top-instagram-link"
-        >
-          <i className="fa-brands fa-meetup meetup-icon"></i>
-        </a>
-        </div>
-      </div>
+      {/* EventList component - displays all events
+          We pass the events array as a "prop" so EventList can display them */}
+      <EventList events={events} />
 
-      <div className="event-list">
-        {events.map((event, index) => (
-          <div key={index} className="event-box" style={{ flexDirection: index % 2 === 0 ? 'row' : 'row-reverse', margin: index % 2 === 0 ? '0 14px 0 0' : '0 0 0 14px' }}>
-            <div className="event-date-badge">
-              <span className="event-month">{event.start.format('MMM').toUpperCase()}</span>
-              <span className="event-day">{event.start.format('D')}</span>
-            </div>
-
-            <div className="event-details">
-              <h2 className="event-name">{event.start.format('dddd')}</h2>
-              <p className="event-time">
-                {event.start.format('h:mma')} – {event.end.format('h:mma')}
-              </p>
-              {event.description && <p className="event-desc">
-                {event.description}
-              </p>}
-
-              {event.location && (
-                <a
-                  className="location-button"
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {event.location.split(',')[0]}
-                </a>
-              )}
-
-              <a
-                className="calendar-button"
-                href={event.htmlLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Add to Calendar
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <footer className="footer">
-        <img src={bowImage} alt="Bow" className="footer-bow bow"  />
-      </footer>
+      {/* Footer component - displays decorative bow image */}
+      <Footer />
     </div>
   );
-}
+};
 
+// Export the component so other files can import and use it
+// main.jsx imports this and renders it to the page
 export default App;
