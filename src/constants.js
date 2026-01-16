@@ -18,5 +18,6 @@ export const API_KEY = 'AIzaSyAU2gf_PZw2nyE1-uy2nUxNCzIdckZ68YU';
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/enchanted.journal.club',
   meetup: 'https://www.meetup.com/austin-enchanted-journal-club-meetup/',
-  cashApp: 'https://cash.app/$EnchantedJournalClub'
+  cashApp: 'https://cash.app/$EnchantedJournalClub',
+  venmo: 'https://account.venmo.com/u/Enchanted-Journal-Club',
 };

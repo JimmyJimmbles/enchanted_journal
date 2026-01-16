@@ -55,6 +55,11 @@ const Header = () => {
           iconClass="fa-brands fa-cash-app"
           label="Support us with Cash App"
         />
+        <SocialLink
+          url={SOCIAL_LINKS.venmo}
+          iconClass="fa-brands fa-vimeo-v"
+          label="Donate to us via Venmo"
+        />
       </div>
     </div>
   );
