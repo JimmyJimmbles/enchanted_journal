@@ -17,5 +17,6 @@ export const API_KEY = 'AIzaSyAU2gf_PZw2nyE1-uy2nUxNCzIdckZ68YU';
 // Social media links - these are used in the Header component
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/enchanted.journal.club',
-  meetup: 'https://www.meetup.com/austin-enchanted-journal-club-meetup/'
+  meetup: 'https://www.meetup.com/austin-enchanted-journal-club-meetup/',
+  cashApp: 'https://cash.app/$EnchantedJournalClub'
 };

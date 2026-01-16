@@ -49,6 +49,12 @@ const Header = () => {
           iconClass="fa-meetup meetup-icon"
           label="Visit our Meetup page"
         />
+
+        <SocialLink
+          url={SOCIAL_LINKS.cashApp}
+          iconClass="fa-brands fa-cash-app"
+          label="Support us with Cash App"
+        />
       </div>
     </div>
   );
